@@ -1,18 +1,20 @@
 import { useState,useEffect } from 'react';
-// import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import theme from "../style/colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
+import TextInputComponent from '../components/TextInput/TextInputComponent';
+import PhoneInputComponent from '../components/TextInput/PhoneInputComponent';
 
-const LoginScreen = ({navigation}) => {
-    const [username, setUsername] = useState('test1@gmail.com');
-    const [password, setPassword] = useState('Password@1');
+const Register = ({navigation}) => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [refferCode, setRefferCode] = useState();
     const [showLoading, setShowLoading] = useState(false);
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    // const navigation = useNavigation();
+    
   
     // Check token valid
     useEffect(() => {
@@ -46,77 +48,68 @@ const LoginScreen = ({navigation}) => {
           <View style={styles.container}>
             <Image source={require('../assets/images/login.png')} resizeMode="cover" style={{width:'100%',height:223}} alt="Login image" />
             <View style={{width:'100%'}}>
-            {/* style={styles.card} */}
-              <Text style={styles.inputTitle}>Email Address</Text>
-              <View style={styles.inputContainer}>
-                <Icon name="user" size={20} color="#000" style={styles.icon} />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Email address..."
-                  value={username}
-                  onChangeText={setUsername}
-                  placeholderTextColor="#999"
-                />
-              </View>
-              <Text style={styles.inputTitle}>Password</Text>
-              <View style={styles.inputContainer}>
-                <Icon name="lock" size={20} color="#000" style={styles.icon} />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Password..."
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!isPasswordVisible}
-                  placeholderTextColor="#999"
-                />
-                <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-                  <Icon
-                    name={isPasswordVisible ? "eye" : "eye-slash"}
-                    size={20}
-                    color="#000"
-                    style={styles.icon}
-                  />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity style={{alignSelf: 'flex-end',marginBottom:20}}
-                onPress={() => navigation.push('ForgetPasswordScreen')}
-              >
-                <Text style={styles.forgetPasswordText}>Forget Password</Text>
-              </TouchableOpacity>
+
+              <TextInputComponent
+                label='Username'
+                placeholder='Username...'
+                value={username} 
+                onChangeText={setUsername}
+                keyboardType='' 
+                isSecure={false}
+              />
+
+              <TextInputComponent
+                label='Email'
+                placeholder='Email...'
+                value={email} 
+                onChangeText={setEmail}
+                keyboardType='email-address' 
+                isSecure={false}
+              />
+              <PhoneInputComponent
+                label='Phone'
+                value={phone}
+                onChange={setPhone}
+              />
+
+              <TextInputComponent
+                label='Password'
+                placeholder='Password...'
+                value={password} 
+                onChangeText={setPassword}
+                keyboardType='' 
+                isSecure={false}
+              />
+
+              <TextInputComponent
+                label='Refferal code'
+                placeholder='Refferal code...'
+                value={refferCode} 
+                onChangeText={setRefferCode}
+                keyboardType='numeric' 
+                isSecure={false}
+              />
+              
               <TouchableOpacity
                 disabled={isButtonDisabled || showLoading}
                 style={[styles.button,{borderRadius:9}, (isButtonDisabled || showLoading) && styles.buttonDisabled]}
                 // onPress={handleLogin}
                 onPress={() => navigation.push('OtpVerificationScreen')}
               >
-                <Text style={styles.buttonText}>Sign In</Text>
+                <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
               {showLoading && <ActivityIndicator size='large' />}
               
               <Text style={styles.createAccountText}>
                 Dont have an account?
                 <TouchableOpacity 
-                  onPress={() => navigation.push('RegisterScreen')}
+                  onPress={() => navigation.push('LoginScreen')}
                 >
-                  <Text style={styles.signUpText}>Sign Up</Text>
+                  <Text style={styles.signUpText}>Sign In</Text>
                 </TouchableOpacity>
               </Text>
-              <Text style={[styles.createAccountText, {color : theme.colors.textDark,marginBottom: 15,marginTop: 20}]}>
-                  Or sign up with
-              </Text>
-              <View style={[styles.container,{flexDirection:'row'}]}>
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/googleIcon.png')} style={{width:50,height:50,marginRight:25}} />
-                </TouchableOpacity>
-
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/facebookIcon.png')} style={{width:50,height:50,marginRight:25}} />
-                </TouchableOpacity>
-
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/appleIcon.png')} style={{width:40,height:40,marginLeft:5}} />
-                </TouchableOpacity>
-              </View>
+              
+              
 
             </View>
           </View>
@@ -202,4 +195,4 @@ const LoginScreen = ({navigation}) => {
     inputTitle : {alignSelf:'flex-start',color: theme.colors.textDark, fontWeight: 'bold',marginBottom:20}
   });
   
-  export default LoginScreen;
+  export default Register;
