@@ -6,6 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import TextInputComponent from '../components/TextInput/TextInputComponent';
 import PhoneInputComponent from '../components/TextInput/PhoneInputComponent';
+import DetailAppBarComponent from '../components/AppBar/DetailAppBarComponent';
+import DividerComponent from '../components/Divider/DividerComponent';
+import DefaultButtonComponent from "../components/Button/DefaultButtonComponent";
+import { CommonStyles } from '../style/CommonStyles';
 
 const OtpVerification = ({navigation}) => {
     const [otp, setOtp] = useState('');
@@ -41,12 +45,17 @@ const OtpVerification = ({navigation}) => {
   
     return (
       <SafeAreaView style={{flex:1}}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={styles.container}>
+        <ScrollView style={CommonStyles.container} >
+          <DetailAppBarComponent 
+            title='OTP Verification'
+            navigation={navigation} 
+          />
+          <DividerComponent />
+          <View style={CommonStyles.scrollViewContainer}>
             
             <View style={{width:'100%'}}>
 
-              <View style={{marginBottom: '140%'}}>
+              <View style={{marginBottom: '125%'}}>
                 <TextInputComponent
                   label='OTP Code'
                   placeholder='Enter 6 digit otp code...'
@@ -70,14 +79,18 @@ const OtpVerification = ({navigation}) => {
                   </TouchableOpacity>
                 </Text>
 
-                <TouchableOpacity
-                  disabled={ showLoading}
-                  style={[styles.button,{borderRadius:9}, ( showLoading) && styles.buttonDisabled]}
-                  // onPress={handleLogin}
-                  onPress={() => navigation.push('OtpVerificationScreen')}
-                >
-                  <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
+                
+
+                <DefaultButtonComponent 
+                  title='Verify OTP'
+                  backgroundColor={theme.colors.primary}
+                  onPress={() => {navigation.push('OtpVerificationScreen')}}
+                  color={theme.colors.textLight}
+                  otherStyle={{width:370,height:60}}
+                  otherTextStyle={{fontSize:22}}
+                  disable={ showLoading}
+                />
+
               </View>
               
               

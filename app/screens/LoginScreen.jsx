@@ -1,18 +1,21 @@
 import { useState,useEffect } from 'react';
-// import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react'
 import theme from "../style/colors";
+import loginImg from '../assets/images/login.png'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
+import TextInputComponent from '../components/TextInput/TextInputComponent';
+import DetailAppBarComponent from '../components/AppBar/DetailAppBarComponent';
+import DividerComponent from '../components/Divider/DividerComponent';
+import { CommonStyles } from '../style/CommonStyles';
+import DefaultButtonComponent from '../components/Button/DefaultButtonComponent';
 
 const LoginScreen = ({navigation}) => {
-    const [username, setUsername] = useState('test1@gmail.com');
-    const [password, setPassword] = useState('Password@1');
+    const [email, setEmail] = useState('test1@gmail.com');
+    const [password, setPassword] = useState(1214);
     const [showLoading, setShowLoading] = useState(false);
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    // const navigation = useNavigation();
+    
   
     // Check token valid
     useEffect(() => {
@@ -30,67 +33,73 @@ const LoginScreen = ({navigation}) => {
     const handleLogin = () => {
       setShowLoading(true);
       // Basic validation
-      if (username === '' || password === '') {
-        Alert.alert('Error', 'Please enter both username and password.');
+      if (email === '' || password === '') {
+        Alert.alert('Error', 'Please enter both email and password.');
         setShowLoading(false);
         return;
       }
-      LoginService({ username, password }, navigation, setShowLoading);
+      LoginService({ email, password }, navigation, setShowLoading);
     };
   
-    const isButtonDisabled = username === '' || password === '';
+    const isButtonDisabled = email === '' || password === '';
   
     return (
       <SafeAreaView style={{flex:1}}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={styles.container}>
-            <Image source={require('../assets/images/login.png')} resizeMode="cover" style={{width:'100%',height:223}} alt="Login image" />
-            <View style={{width:'100%'}}>
-            {/* style={styles.card} */}
-              <Text style={styles.inputTitle}>Email Address</Text>
-              <View style={styles.inputContainer}>
-                <Icon name="user" size={20} color="#000" style={styles.icon} />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Email address..."
-                  value={username}
-                  onChangeText={setUsername}
-                  placeholderTextColor="#999"
-                />
-              </View>
-              <Text style={styles.inputTitle}>Password</Text>
-              <View style={styles.inputContainer}>
-                <Icon name="lock" size={20} color="#000" style={styles.icon} />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Password..."
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!isPasswordVisible}
-                  placeholderTextColor="#999"
-                />
-                <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-                  <Icon
-                    name={isPasswordVisible ? "eye" : "eye-slash"}
-                    size={20}
-                    color="#000"
-                    style={styles.icon}
-                  />
-                </TouchableOpacity>
-              </View>
+        <ScrollView style={CommonStyles.container} >
+
+          <DetailAppBarComponent 
+            title='Login'
+            navigation={navigation} 
+          />
+          <DividerComponent />
+
+          <View style={CommonStyles.scrollViewContainer}>
+            <Image source={loginImg} resizeMode="cover" style={{width:'100%',height:223}} alt="Login image" />
+            <View >
+              
+
+              <TextInputComponent 
+                label='Email Address' 
+                placeholder='Email address...' 
+                value={email} 
+                onChangeText={setEmail} 
+                keyboardType='email-address'
+                isSecure={false}
+              />
+
+
+              <TextInputComponent 
+                label='Pin' 
+                placeholder='Enter 4 digit pin...' 
+                value={password} 
+                onChangeText={setPassword} 
+                keyboardType='numeric'
+                isSecure={true}
+              />
+
               <TouchableOpacity style={{alignSelf: 'flex-end',marginBottom:20}}
                 onPress={() => navigation.push('ForgetPasswordScreen')}
               >
-                <Text style={styles.forgetPasswordText}>Forget Password</Text>
+                <Text style={styles.forgetPasswordText}>Forgot Pin</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 disabled={isButtonDisabled || showLoading}
                 style={[styles.button,{borderRadius:9}, (isButtonDisabled || showLoading) && styles.buttonDisabled]}
                 // onPress={handleLogin}
                 onPress={() => navigation.push('OtpVerificationScreen')}
               >
-                <Text style={styles.buttonText}>Sign In</Text>
-              </TouchableOpacity>
+                <Text style={styles.buttonText}>Login</Text>
+              </TouchableOpacity> */}
+
+              <DefaultButtonComponent 
+                title='Login'
+                backgroundColor={theme.colors.primary}
+                onPress={() => {navigation.push('OtpVerificationScreen')}}
+                color={theme.colors.textLight}
+                otherStyle={{width:370,height:60}}
+                otherTextStyle={{fontSize:22}}
+                disable={isButtonDisabled || showLoading}
+              />
               {showLoading && <ActivityIndicator size='large' />}
               
               <Text style={styles.createAccountText}>
@@ -101,6 +110,8 @@ const LoginScreen = ({navigation}) => {
                   <Text style={styles.signUpText}>Sign Up</Text>
                 </TouchableOpacity>
               </Text>
+
+
               <Text style={[styles.createAccountText, {color : theme.colors.textDark,marginBottom: 15,marginTop: 20}]}>
                   Or sign up with
               </Text>

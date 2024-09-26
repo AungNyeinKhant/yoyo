@@ -6,6 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import TextInputComponent from '../components/TextInput/TextInputComponent';
 import PhoneInputComponent from '../components/TextInput/PhoneInputComponent';
+import DetailAppBarComponent from '../components/AppBar/DetailAppBarComponent';
+import DividerComponent from '../components/Divider/DividerComponent';
+import DefaultButtonComponent from "../components/Button/DefaultButtonComponent";
+import { CommonStyles } from '../style/CommonStyles';
 
 const Register = ({navigation}) => {
     const [username, setUsername] = useState('');
@@ -44,8 +48,14 @@ const Register = ({navigation}) => {
   
     return (
       <SafeAreaView style={{flex:1}}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={styles.container}>
+        <ScrollView style={CommonStyles.container} >
+          <DetailAppBarComponent 
+            title='Register'
+            navigation={navigation} 
+          />
+          <DividerComponent />
+
+          <View style={CommonStyles.scrollViewContainer}>
             <Image source={require('../assets/images/login.png')} resizeMode="cover" style={{width:'100%',height:223}} alt="Login image" />
             <View style={{width:'100%'}}>
 
@@ -73,8 +83,8 @@ const Register = ({navigation}) => {
               />
 
               <TextInputComponent
-                label='Password'
-                placeholder='Password...'
+                label='Create Pin'
+                placeholder='Enter 4 digit pin...'
                 value={password} 
                 onChangeText={setPassword}
                 keyboardType='' 
@@ -89,25 +99,38 @@ const Register = ({navigation}) => {
                 keyboardType='numeric' 
                 isSecure={false}
               />
+
+                <Text style={[styles.createAccountText,{marginBottom:10,alignSelf:'flex-end'}]}>
+                  Already have an account?
+                  <TouchableOpacity 
+                    onPress={() => navigation.push('LoginScreen')}
+                  >
+                    <Text style={styles.signUpText}>Sign In</Text>
+                  </TouchableOpacity>
+                </Text>
               
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 disabled={isButtonDisabled || showLoading}
                 style={[styles.button,{borderRadius:9}, (isButtonDisabled || showLoading) && styles.buttonDisabled]}
                 // onPress={handleLogin}
                 onPress={() => navigation.push('OtpVerificationScreen')}
               >
-                <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
+                <Text style={styles.buttonText}>Register</Text>
+              </TouchableOpacity> */}
+
+              <DefaultButtonComponent 
+                title='Register'
+                backgroundColor={theme.colors.primary}
+                onPress={() => {navigation.push('OtpVerificationScreen')}}
+                color={theme.colors.textLight}
+                otherStyle={{width:370,height:60,marginBottom:20}}
+                otherTextStyle={{fontSize:22}}
+                disable={isButtonDisabled || showLoading}
+              />
+
               {showLoading && <ActivityIndicator size='large' />}
               
-              <Text style={styles.createAccountText}>
-                Dont have an account?
-                <TouchableOpacity 
-                  onPress={() => navigation.push('LoginScreen')}
-                >
-                  <Text style={styles.signUpText}>Sign In</Text>
-                </TouchableOpacity>
-              </Text>
+              
               
               
 

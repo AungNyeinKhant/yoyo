@@ -3,16 +3,18 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { CommonStyles } from '../../style/CommonStyles';
 import theme from '../../style/colors';
 
-const DefaultButtonComponent = ({ title, backgroundColor, onPress,color }) => {
+const DefaultButtonComponent = ({ title, backgroundColor, onPress,color,otherStyle,otherTextStyle,disable=false }) => {
   return (
     <TouchableOpacity
-      style={[CommonStyles.defaultButton, { backgroundColor: backgroundColor }]}
+      style={[CommonStyles.defaultButton, { backgroundColor: backgroundColor },otherStyle]}
       onPress={onPress}
+      disabled={disable}
     >          
       <Text
   style={[
     CommonStyles.defaultButtonText,
-    color && { color: color }
+    color && { color: color },
+    otherTextStyle
   ]}
 >
   {title}

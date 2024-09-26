@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent:'space-between',
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
