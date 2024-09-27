@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } fro
 import React from 'react'
 import theme from "../style/colors";
 import loginImg from '../assets/images/login.png'
+import googleIcon from '../assets/icons/googleIcon.png'
+import fbIcon from '../assets/icons/facebookIcon.png'
+import appleIcon from '../assets/icons/appleIcon.png'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import TextInputComponent from '../components/TextInput/TextInputComponent';
@@ -10,14 +13,13 @@ import DetailAppBarComponent from '../components/AppBar/DetailAppBarComponent';
 import DividerComponent from '../components/Divider/DividerComponent';
 import { CommonStyles } from '../style/CommonStyles';
 import DefaultButtonComponent from '../components/Button/DefaultButtonComponent';
+import SocialLoginButtonComponent from '../components/Button/SocialLoginButtonComponent';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('test1@gmail.com');
     const [password, setPassword] = useState(1214);
     const [showLoading, setShowLoading] = useState(false);
-    
   
-    // Check token valid
     useEffect(() => {
       const checkToken = async () => {
         const isValid = await AccessTokenService._TokenValidation();
@@ -29,7 +31,7 @@ const LoginScreen = ({navigation}) => {
       }
       // checkToken();
     }, []);
-  
+
     const handleLogin = () => {
       setShowLoading(true);
       // Basic validation
@@ -82,14 +84,7 @@ const LoginScreen = ({navigation}) => {
               >
                 <Text style={styles.forgetPasswordText}>Forgot Pin</Text>
               </TouchableOpacity>
-              {/* <TouchableOpacity
-                disabled={isButtonDisabled || showLoading}
-                style={[styles.button,{borderRadius:9}, (isButtonDisabled || showLoading) && styles.buttonDisabled]}
-                // onPress={handleLogin}
-                onPress={() => navigation.push('OtpVerificationScreen')}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity> */}
+              
 
               <DefaultButtonComponent 
                 title='Login'
@@ -115,18 +110,26 @@ const LoginScreen = ({navigation}) => {
               <Text style={[styles.createAccountText, {color : theme.colors.textDark,marginBottom: 15,marginTop: 20}]}>
                   Or sign up with
               </Text>
-              <View style={[styles.container,{flexDirection:'row'}]}>
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/googleIcon.png')} style={{width:50,height:50,marginRight:25}} />
-                </TouchableOpacity>
+              <View style={[CommonStyles.scrollViewContainer,{flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
+                
+                <SocialLoginButtonComponent 
+                  onPress={()=>{}}
+                  image={googleIcon}
+                />
 
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/facebookIcon.png')} style={{width:50,height:50,marginRight:25}} />
-                </TouchableOpacity>
+                <SocialLoginButtonComponent 
+                  onPress={()=>{}}
+                  image={fbIcon}
+                />
 
-                <TouchableOpacity>
-                  <Image source={require('../assets/icons/appleIcon.png')} style={{width:40,height:40,marginLeft:5}} />
-                </TouchableOpacity>
+                <SocialLoginButtonComponent 
+                  onPress={()=>{}}
+                  image={appleIcon}
+                  width={40}
+                  height={40}
+                  marginRight={0}
+                />
+                
               </View>
 
             </View>
@@ -135,62 +138,7 @@ const LoginScreen = ({navigation}) => {
       </SafeAreaView>
     );
   };
-  
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 16,
-    },
-    logo: {
-      marginBottom: 24,
-    },
-    card: {
-      marginTop: -40,
-      width: '100%',
-      padding: 30,
-      borderRadius: 8,
-      backgroundColor: theme.colors.textLight,
-      shadowColor: theme.colors.textDark,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-    },
-    inputContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderColor: theme.colors.borderColor,
-      borderWidth: 1,
-      borderRadius: 4,
-      marginBottom: 16,
-      paddingHorizontal: 8,
-      backgroundColor: theme.colors.inputBackgroundColor,
-    },
-    icon: {
-      marginRight: 10,
-    },
-    input: {
-      flex: 1,
-      height: 50, // Increase the height of the TextInput
-      color: theme.colors.textDark,
-    },
-    button: {
-      backgroundColor: theme.colors.primary,
-      paddingVertical: 15, // Increase the vertical padding
-      paddingHorizontal: 25, // Increase the horizontal padding
-      borderRadius: 30, // Increase the border radius
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    buttonDisabled: {
-      backgroundColor: theme.colors.borderColor,
-    },
-    buttonText: {
-      color: theme.colors.textLight,
-      fontSize: 18, // Increase the font size
-    },
     forgetPasswordText: {
       color: theme.colors.primary,
       textDecorationLine: 'underline',
@@ -210,7 +158,7 @@ const LoginScreen = ({navigation}) => {
       marginTop: 5,
       fontWeight:'bold'
     },
-    inputTitle : {alignSelf:'flex-start',color: theme.colors.textDark, fontWeight: 'bold',marginBottom:20}
   });
+  
   
   export default LoginScreen;

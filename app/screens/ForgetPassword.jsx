@@ -1,5 +1,5 @@
-import { useState,useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import { useState } from 'react';
+import {  Text, View, Alert } from 'react-native'
 import React from 'react'
 import theme from "../style/colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,20 +15,6 @@ const ForgetPassword = ({navigation}) => {
     
     const [showLoading, setShowLoading] = useState(false);
     
-  
-    // Check token valid
-    useEffect(() => {
-      const checkToken = async () => {
-        const isValid = await AccessTokenService._TokenValidation();
-        if (isValid) {
-          navigation.navigate('TabStack');
-        } else {
-          navigation.navigate('Login');
-        }
-      }
-      // checkToken();
-    }, []);
-  
     const handleLogin = () => {
       setShowLoading(true);
       // Basic validation

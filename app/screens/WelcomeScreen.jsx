@@ -1,15 +1,36 @@
-import { ScrollView, Text, View, Image, StyleSheet } from "react-native";
+import { ScrollView, Text, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useEffect } from "react";
 import { CommonStyles } from "../style/CommonStyles";
 import theme from "../style/colors";
 import heroImg from '../assets/images/hero1.png'
-import { TouchableOpacity } from "react-native-gesture-handler";
 import DefaultButtonComponent from "../components/Button/DefaultButtonComponent";
 
 
 
 export default function WelcomeScreen({navigation}) {
+
+    // useEffect(() => {
+    //     const checkAccessToken = async () => {
+    //       try {
+    //        const isValid=await AccessTokenService._TokenValidation();
+    //        console.log("isValud",isValid);
+    //        if(isValid){
+    //         setIsAuthenticated(true)
+    //        }
+    //        else{
+    //         Alert.alert("","Session Expired");
+    //         // navigation.navigate('unauthorized');
+    //        }
+    //       } catch (error) {
+    //         console.log("Keychain couldn't be accessed!", error);
+    //         navigation.navigate('Login');
+    //       }
+    //     };
+    
+    //     // checkAccessToken();
+    //     // _BackHandlerService();
+    //   }, [navigation]);
 
     return (
         <SafeAreaView style={{flex : 1}}>
@@ -34,11 +55,7 @@ export default function WelcomeScreen({navigation}) {
                 
 
                 <View style={{flex:1,alignItems:'center',marginTop:10}}>
-                    {/* <TouchableOpacity style={styles.button}
-                        onPress={() => {navigation.push('LoginScreen')}}
-                    >
-                        <Text style={styles.label}>Access Marketplace</Text>
-                    </TouchableOpacity> */}
+                    
                     <DefaultButtonComponent 
                         title='Access Marketplace'
                         backgroundColor={theme.colors.primary}
