@@ -6,6 +6,12 @@ export const CommonStyles = {
     dividerView: {
       marginTop: 20,
     },
+    subTitle : {
+      fontSize: 20,
+      fontWeight:'bold',
+      color:theme.colors.textDark,
+      marginTop:20
+    },
     divider: {
       height: 1,
       backgroundColor: '#F1F1F1',
@@ -41,8 +47,8 @@ export const CommonStyles = {
     scrollViewContainer:{
       flex:1,
       display:'flex',
-      paddingLeft:30,
-      paddingRight:30,
+      paddingLeft:20,
+      paddingRight:20,
       marginTop:0,
       backgroundColor:theme.colors.textLight
     },

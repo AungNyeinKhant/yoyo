@@ -85,7 +85,6 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.forgetPasswordText}>Forgot Pin</Text>
               </TouchableOpacity>
               
-
               <DefaultButtonComponent 
                 title='Login'
                 backgroundColor={theme.colors.primary}

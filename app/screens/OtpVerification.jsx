@@ -69,7 +69,7 @@ const OtpVerification = ({navigation}) => {
                 <DefaultButtonComponent 
                   title='Verify OTP'
                   backgroundColor={theme.colors.primary}
-                  onPress={() => {navigation.push('OtpVerificationScreen')}}
+                  onPress={() => {navigation.push('TabStack')}}
                   color={theme.colors.textLight}
                   otherStyle={{width:370,height:60}}
                   otherTextStyle={{fontSize:22}}

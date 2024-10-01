@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Dimensions, StyleSheet } from 'react-native';
+import { View, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
-const CarouselComponent = ({ data, setShowLoading }) => {
+const CarouselComponent = ({ data, setShowLoading,navigation }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [loadedImages, setLoadedImages] = useState(0);
 
@@ -18,23 +18,29 @@ const CarouselComponent = ({ data, setShowLoading }) => {
   const renderItem = ({ item }) => {
     return (
       <View style={styles.slide}>
-        <Image 
-          source={{ uri: item.url }} 
-          style={styles.image} 
-          onLoadEnd={() => setLoadedImages(loadedImages + 1)}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.push('AppStack', { screen: 'RoomListScreen' })}
+          
+        >
+          <Image 
+            source={{ uri: item.url }} 
+            style={styles.image} 
+            onLoadEnd={() => setLoadedImages(loadedImages + 1)}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
 
   return (
-    <View>
+    <View style={{marginTop:20}}>
       <Carousel
         data={data}
         renderItem={renderItem}
         sliderWidth={viewportWidth}
         itemWidth={viewportWidth}
         onSnapToItem={(index) => setActiveSlide(index)}
+        
       />
       <Pagination
         dotsLength={data.length}
@@ -51,14 +57,17 @@ const CarouselComponent = ({ data, setShowLoading }) => {
 
 const styles = StyleSheet.create({
   slide: {
-    width: viewportWidth,
-    height: 200,
-    justifyContent: 'center'
+    width: viewportWidth*0.9,
+    height: 230,
+    justifyContent: 'center',
+    borderRadius:13,
+    overflow:'hidden'
   },
   image: {
-    width: 330,
-    height: 200,
+    width: '100%',
+    height: 230,
     
+    // borderRadius:25
   },
   paginationContainer: {
     paddingVertical: 10
