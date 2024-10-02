@@ -94,7 +94,7 @@ const RoomDetail = ({navigation}) => {
           <DetailAppBarComponent title='Room Details' navigation={navigation}  />
           <DividerComponent />
             <View>
-              <CarouselComponent data={data} setShowLoading={setShowLoading} navigation={navigation} />
+              <CarouselComponent data={data} setShowLoading={setShowLoading} navigation={navigation} carouselType='roomDetail' />
               <Text style={CommonStyles.subTitle}>Standard Rooms</Text>
               <Text style={CommonStyles.text}>
                   

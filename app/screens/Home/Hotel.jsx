@@ -5,7 +5,7 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { CommonStyles } from '../../style/CommonStyles'
 import BookingSkeletonComponent from '../../components/Skeleton/BookingSkeletonComponent'
 import CarouselComponent from '../../components/Caurosel/CauroselComponent'
-import CardComponent from '../../components/Card/CardComponent'
+
 
 
 
@@ -41,15 +41,9 @@ const Hotel = ({navigation}) => {
     <SafeAreaView style={{flex:1}}>
       <View style={[CommonStyles.scrollViewContainer,{flexGrow:1}]}>
           <Text style={CommonStyles.subTitle}>Top Hotels</Text>
-          {/* <FlatList 
-            ListHeaderComponent={}
-            // data={{}} // data for side 2 side
-            // keyExtractor={(item) => item.id}
-            // renderItem={CardComponent}
-            // numColumns={2}
-            // contentContainerStyle={{}}
-          /> */}
-          <CarouselComponent data={data} setShowLoading={setShowLoading} navigation={navigation} />
+          <CarouselComponent data={data} setShowLoading={setShowLoading} navigation={navigation} carouselType='home' />
+          
+           
       </View>
     </SafeAreaView>
 
