@@ -2,7 +2,7 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import {useState} from 'react'
 import { CommonStyles } from '../../../style/CommonStyles'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
+import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import CarouselComponent from '../../../components/Caurosel/CauroselComponent'
 import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarComponent'
 import RoomCategoryListComponent from '../../../components/List/RoomCategoryListComponent'
@@ -10,6 +10,7 @@ import DividerComponent from '../../../components/Divider/DividerComponent'
 import Accordion from '../../../components/accordion/Accordion'
 import AccordionText from '../../../components/accordion/AccordionText'
 import AccordionIcons from '../../../components/accordion/AccordionIcons'
+import SeeMoreComponent from '../../../components/screen/SeeMoreComponent'
 
 
 const RoomDetail = ({navigation}) => {
@@ -129,7 +130,8 @@ const RoomDetail = ({navigation}) => {
             />
 
 
-            <Text style={CommonStyles.subTitle}>Avaliable Rooms(5)</Text>
+            <SeeMoreComponent title='Avaliable Rooms(5)' onPress={()=> navigation.push('RoomDetailPlainScreen')} />
+
             <RoomCategoryListComponent 
                 data={data2}
                 navigation={navigation}

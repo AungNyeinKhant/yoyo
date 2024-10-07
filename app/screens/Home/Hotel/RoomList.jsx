@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import {useState} from 'react'
 import { CommonStyles } from '../../../style/CommonStyles'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { FlatList } from 'react-native-gesture-handler'
 import CarouselComponent from '../../../components/Caurosel/CauroselComponent'
 import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarComponent'
 import RoomCategoryListComponent from '../../../components/List/RoomCategoryListComponent'
 import DividerComponent from '../../../components/Divider/DividerComponent'
+import SeeMoreComponent from '../../../components/screen/SeeMoreComponent'
 
 
 const RoomList = ({navigation}) => {
@@ -84,7 +84,10 @@ const RoomList = ({navigation}) => {
                   
                   120 Baho Road,Hlaing, Yangon
               </Text>
+              
             </View>
+            
+            <SeeMoreComponent title='Room Categories' onPress={()=> navigation.push('RoomListPlainScreen')} />
             <RoomCategoryListComponent 
                 data={data2}
                 navigation={navigation}
