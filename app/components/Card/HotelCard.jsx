@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 5,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.textLight,
     borderRadius: 10,
     overflow: 'hidden',
     position:'relative'
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingBottom: 10,
     fontSize: 14,
-    color: '#555',
+    color: theme.colors.infoText,
   },
   bookmarkIcon: {
     padding: 10,

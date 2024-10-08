@@ -13,7 +13,7 @@
       textLightGray:'#EEEEEE',   
       borderColor:"#ccc",
       inputBackgroundColor:"#f9f9f9",
-      infoText:"#999",
+      infoText:"#555",
       iconBackgroundColor:'#F1F1F1',
       iconTextColor:'#898C8F',
       textInputColor:'#B7B8BA',

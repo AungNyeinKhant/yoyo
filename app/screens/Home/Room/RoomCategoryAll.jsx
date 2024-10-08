@@ -6,7 +6,7 @@ import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarCompon
 import DividerComponent from '../../../components/Divider/DividerComponent'
 import { CommonStyles } from '../../../style/CommonStyles'
 
-const RoomListPlain = ({navigation}) => {
+const RoomCategoryAll = ({navigation}) => {
     const data2 = [
         {
           id : 0,
@@ -52,7 +52,7 @@ const RoomListPlain = ({navigation}) => {
                 data={data2}
                 navigation={navigation}
                 type='category'
-                onPress={() => navigation.push('AppStack', { screen: 'RoomDetailScreen' })}
+                onPress={() => navigation.push('AppStack', { screen: 'RoomListScreen' })}
           />
         </View>
     </SafeAreaView>
@@ -60,6 +60,6 @@ const RoomListPlain = ({navigation}) => {
   )
 }
 
-export default RoomListPlain
+export default RoomCategoryAll
 
 const styles = StyleSheet.create({})

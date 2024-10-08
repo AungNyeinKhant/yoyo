@@ -79,7 +79,7 @@ const Hotel = ({navigation}) => {
           <FlatList
             data={hotels}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <HotelCard hotel={item} onPress={() => navigation.push('AppStack', { screen: 'RoomListScreen' })} />}
+            renderItem={({ item }) => <HotelCard hotel={item} onPress={() => navigation.push('AppStack', { screen: 'RoomCategoryScreen' })} />}
             numColumns={2}
             contentContainerStyle={styles.flatList}
           />

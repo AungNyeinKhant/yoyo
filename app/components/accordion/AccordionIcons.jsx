@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import theme from '../../style/colors'
 
 const AccordionIcons = ({icon,text}) => {
   return (
@@ -21,14 +22,14 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
       paddingVertical: 5,
       borderRadius: 10,
-      backgroundColor: '#f0f0f0',
+      backgroundColor: theme.colors.backgroundColor,
     },
     iconStyle: {
       marginRight: 8,
-      color: '#000',
+      color: theme.colors.textDark,
     },
     textStyle: {
       fontSize: 14,
-      color: '#000',
+      color: theme.colors.textDark,
     },
   });
