@@ -58,7 +58,7 @@ const OtpVerification = ({navigation}) => {
                 <Text style={[styles.createAccountText,{marginBottom:20,}]}>
                   No OTP yet?  
                   <TouchableOpacity 
-                    onPress={() => navigation.push('LoginScreen')}
+                    onPress={() => navigation.navigate('LoginScreen')}
                   >
                     <Text style={[styles.signUpText,{marginLeft:5}]}>Resend OTP</Text>
                   </TouchableOpacity>

@@ -22,7 +22,7 @@ const CarouselComponent = ({ data, setShowLoading,navigation, carouselType }) =>
     return (
       <View style={styles.slide}>
         <TouchableOpacity
-          onPress={() => navigation.push('AppStack', { screen: 'RoomCategoryScreen' })}
+          onPress={() => navigation.navigate('AppStack', { screen: 'RoomCategoryScreen' })}
           
         >
           <Image 

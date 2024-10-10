@@ -1,5 +1,5 @@
 import { Alert, StyleSheet, Text, View } from 'react-native'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { CommonStyles } from '../../../style/CommonStyles'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
@@ -11,10 +11,30 @@ import Accordion from '../../../components/accordion/Accordion'
 import AccordionText from '../../../components/accordion/AccordionText'
 import AccordionIcons from '../../../components/accordion/AccordionIcons'
 import SeeMoreComponent from '../../../components/screen/SeeMoreComponent'
-
+import CarouselSkeletonComponent from '../../../components/Skeleton/CauroselSkeletonComponent'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import ListSkeletonComponent from '../../../components/Skeleton/ListSkeletonComponent'
 
 const RoomDetail = ({navigation}) => {
-  const [showLoading, setShowLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
+
+  useEffect(()=>{
+    const timer = setTimeout(() => setShowLoading(false), 2000);
+
+    // Cleanup timer on unmount
+    return () => clearTimeout(timer);
+  })
+
+  if(showLoading){
+    return(
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={[CommonStyles.scrollViewContainer]}>
+          <CarouselSkeletonComponent />
+          <ListSkeletonComponent />
+      </View>
+      </GestureHandlerRootView>
+    )
+  }
 
   const data = [
     {
@@ -130,7 +150,7 @@ const RoomDetail = ({navigation}) => {
             />
 
 
-            <SeeMoreComponent title='Avaliable Rooms(5)' onPress={()=> navigation.push('RoomListAllScreen')} />
+            <SeeMoreComponent title='Avaliable Rooms(5)' onPress={()=> navigation.navigate('RoomListAllScreen')} />
 
             <RoomCategoryListComponent 
                 data={data2}

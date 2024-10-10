@@ -52,6 +52,13 @@ export const CommonStyles = {
       marginTop:0,
       backgroundColor:theme.colors.textLight
     },
+    formLabel: {
+      fontSize: 16,
+      fontWeight: '500',
+      marginBottom: 5,
+      marginTop:10,
+      color: theme.colors.labelColor,
+    },
     textContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',

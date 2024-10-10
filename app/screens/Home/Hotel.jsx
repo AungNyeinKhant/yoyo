@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { CommonStyles } from '../../style/CommonStyles'
 import BookingSkeletonComponent from '../../components/Skeleton/BookingSkeletonComponent'
 import CarouselComponent from '../../components/Caurosel/CauroselComponent'
 import HotelCard from '../../components/Card/HotelCard'
+import SeeMoreComponent from '../../components/screen/SeeMoreComponent'
+import CarouselSkeletonComponent from '../../components/Skeleton/CauroselSkeletonComponent'
 
 
 
@@ -13,6 +15,19 @@ import HotelCard from '../../components/Card/HotelCard'
 
 const Hotel = ({navigation}) => {
   const [showLoading, setShowLoading] = useState(false);
+
+  useEffect(()=>{
+    // const timer = setTimeout(() => setShowLoading(false), 2000);
+
+    // Cleanup timer on unmount
+    // return () => clearTimeout(timer);
+  })
+
+  if(showLoading){
+    return(<>
+      <CarouselSkeletonComponent />
+    </>)
+  }
 
   const data = [
     {
@@ -68,7 +83,7 @@ const Hotel = ({navigation}) => {
 
   if(showLoading){
     return(<BookingSkeletonComponent />)
-  }
+  } 
 
   return (
 
@@ -76,12 +91,13 @@ const Hotel = ({navigation}) => {
       <View style={[CommonStyles.scrollViewContainer,{flexGrow:1}]}>
           <Text style={CommonStyles.subTitle}>Top Hotels</Text>
           <CarouselComponent data={data} setShowLoading={setShowLoading} navigation={navigation} carouselType='home' />
+          <SeeMoreComponent title='Hotels Nearby' onPress={()=> {}} />
           <FlatList
             data={hotels}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <HotelCard hotel={item} onPress={() => navigation.push('AppStack', { screen: 'RoomCategoryScreen' })} />}
+            renderItem={({ item }) => <HotelCard hotel={item} onPress={() => navigation.navigate('AppStack', { screen: 'RoomCategoryScreen' })} />}
             numColumns={2}
-            contentContainerStyle={styles.flatList}
+            contentContainerStyle={{marginTop:20}}
           />
            
       </View>

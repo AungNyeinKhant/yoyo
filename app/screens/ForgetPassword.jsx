@@ -63,7 +63,7 @@ const ForgetPassword = ({navigation}) => {
                 <DefaultButtonComponent 
                   title='Send email'
                   backgroundColor={theme.colors.primary}
-                  onPress={() => {navigation.push('OtpVerificationScreen')}}
+                  onPress={() => {navigation.navigate('OtpVerificationScreen')}}
                   color={theme.colors.textLight}
                   otherStyle={{width:370,height:60}}
                   otherTextStyle={{fontSize:22}}

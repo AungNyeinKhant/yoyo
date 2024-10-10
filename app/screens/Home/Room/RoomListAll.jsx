@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarComponent'
 import RoomCategoryListComponent from '../../../components/List/RoomCategoryListComponent'
@@ -9,10 +9,32 @@ import { CommonStyles } from '../../../style/CommonStyles'
 import discountIcon from '../../../assets/icons/discountIcon.png'
 import DefaultButtonComponent from '../../../components/Button/DefaultButtonComponent'
 import theme from '../../../style/colors'
-import { ScrollView } from 'react-native-gesture-handler'
+import CarouselSkeletonComponent from '../../../components/Skeleton/CauroselSkeletonComponent'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import ListSkeletonComponent from '../../../components/Skeleton/ListSkeletonComponent'
 
-const RoomDetailPlain = ({navigation}) => {
+
+const RoomListAll = ({navigation}) => {
     const [visible,SetVisible] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
+
+    useEffect(()=>{
+      const timer = setTimeout(() => setShowLoading(false), 2000);
+  
+      // Cleanup timer on unmount
+      return () => clearTimeout(timer);
+    })
+  
+    if(showLoading){
+      return(
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <View style={[CommonStyles.scrollViewContainer]}>
+            <CarouselSkeletonComponent />
+            <ListSkeletonComponent />
+        </View>
+        </GestureHandlerRootView>
+      )
+    }
 
     const data2 = [
         {
@@ -65,6 +87,7 @@ const RoomDetailPlain = ({navigation}) => {
             title='Do you know?'
             isVisible={visible}
             onClose={() => SetVisible(false)}
+            snapPoints={['60%','80%']}
           >
             <View style={{flex:1}}>
               <View style={styles.imgContainer}>
@@ -76,12 +99,14 @@ const RoomDetailPlain = ({navigation}) => {
                 backgroundColor={theme.colors.primary}
                 color={theme.colors.textLight}
                 otherStyle={{height:60,borderRadius:30}}
+                onPress={()=> navigation.navigate('AppStack', { screen: 'ReservationFormScreen' })}
               />
               <DefaultButtonComponent 
                 title='Book without account'
                 backgroundColor={theme.colors.textLightGray}
                 color={theme.colors.textDark}
                 otherStyle={{height:60,borderRadius:30}}
+                onPress={()=> navigation.navigate('AppStack', { screen: 'ReservationFormScreen' })}
               />
 
             </View>
@@ -91,7 +116,7 @@ const RoomDetailPlain = ({navigation}) => {
   )
 }
 
-export default RoomDetailPlain
+export default RoomListAll
 
 const styles = StyleSheet.create({
   imgContainer :{

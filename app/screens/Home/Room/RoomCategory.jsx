@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { CommonStyles } from '../../../style/CommonStyles'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CarouselComponent from '../../../components/Caurosel/CauroselComponent'
@@ -7,10 +7,31 @@ import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarCompon
 import RoomCategoryListComponent from '../../../components/List/RoomCategoryListComponent'
 import DividerComponent from '../../../components/Divider/DividerComponent'
 import SeeMoreComponent from '../../../components/screen/SeeMoreComponent'
+import CarouselSkeletonComponent from '../../../components/Skeleton/CauroselSkeletonComponent'
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
+import ListSkeletonComponent from '../../../components/Skeleton/ListSkeletonComponent'
 
 
 const RoomCategory = ({navigation}) => {
-  const [showLoading, setShowLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
+
+  useEffect(()=>{
+    const timer = setTimeout(() => setShowLoading(false), 2000);
+
+    // Cleanup timer on unmount
+    return () => clearTimeout(timer);
+  })
+
+  if(showLoading){
+    return(
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={[CommonStyles.scrollViewContainer]}>
+          <CarouselSkeletonComponent />
+          <ListSkeletonComponent />
+      </View>
+      </GestureHandlerRootView>
+    )
+  }
 
   const data = [
     {
@@ -87,12 +108,12 @@ const RoomCategory = ({navigation}) => {
               
             </View>
             
-            <SeeMoreComponent title='Room Categories' onPress={()=> navigation.push('RoomCategoryAllScreen')} />
+            <SeeMoreComponent title='Room Categories' onPress={()=> navigation.navigate('RoomCategoryAllScreen')} />
             <RoomCategoryListComponent 
                 data={data2}
                 navigation={navigation}
                 type='category'
-                onPress={() => navigation.push('AppStack', { screen: 'RoomListScreen' })}
+                onPress={() => navigation.navigate('AppStack', { screen: 'RoomListScreen' })}
             />
       </View>
       <View>

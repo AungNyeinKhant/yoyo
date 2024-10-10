@@ -21,7 +21,8 @@
       walletCardColor:'#0071FE',
       typoInfoColor:'#F5F5F5',
       borderColor:'#202020',
-      chipBackgroundColor:'#7FE1F8'
+      chipBackgroundColor:'#7FE1F8',
+      labelColor: '#001529'
     },
     status:{
       backgroundColor:'#F7F7F7'

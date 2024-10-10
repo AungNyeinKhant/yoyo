@@ -80,7 +80,7 @@ const LoginScreen = ({navigation}) => {
               />
 
               <TouchableOpacity style={{alignSelf: 'flex-end',marginBottom:20}}
-                onPress={() => navigation.push('ForgetPasswordScreen')}
+                onPress={() => navigation.navigate('ForgetPasswordScreen')}
               >
                 <Text style={styles.forgetPasswordText}>Forgot Pin</Text>
               </TouchableOpacity>
@@ -88,7 +88,7 @@ const LoginScreen = ({navigation}) => {
               <DefaultButtonComponent 
                 title='Login'
                 backgroundColor={theme.colors.primary}
-                onPress={() => {navigation.push('OtpVerificationScreen')}}
+                onPress={() => {navigation.navigate('OtpVerificationScreen')}}
                 color={theme.colors.textLight}
                 otherStyle={{width:370,height:60}}
                 otherTextStyle={{fontSize:22}}
@@ -99,7 +99,7 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.createAccountText}>
                 Dont have an account?
                 <TouchableOpacity 
-                  onPress={() => navigation.push('RegisterScreen')}
+                  onPress={() => navigation.navigate('RegisterScreen')}
                 >
                   <Text style={styles.signUpText}>Sign Up</Text>
                 </TouchableOpacity>

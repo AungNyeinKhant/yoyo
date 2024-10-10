@@ -103,7 +103,7 @@ const Register = ({navigation}) => {
                 <Text style={[styles.createAccountText,{marginBottom:10,alignSelf:'flex-end'}]}>
                   Already have an account?
                   <TouchableOpacity 
-                    onPress={() => navigation.push('LoginScreen')}
+                    onPress={() => navigation.navigate('LoginScreen')}
                   >
                     <Text style={styles.signUpText}>Sign In</Text>
                   </TouchableOpacity>
@@ -114,7 +114,7 @@ const Register = ({navigation}) => {
               <DefaultButtonComponent 
                 title='Register'
                 backgroundColor={theme.colors.primary}
-                onPress={() => {navigation.push('OtpVerificationScreen')}}
+                onPress={() => {navigation.navigate('OtpVerificationScreen')}}
                 color={theme.colors.textLight}
                 otherStyle={{width:370,height:60,marginBottom:20}}
                 otherTextStyle={{fontSize:22}}

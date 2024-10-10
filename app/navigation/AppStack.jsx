@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
-// import WelcomeScreen from '../screens/WelcomeScreen';
-// import Home from '../screens/Home/Home';
+
 import RoomCategory from '../screens/Home/Room/RoomCategory';
 import RoomCategoryAll from '../screens/Home/Room/RoomCategoryAll';
 
 import RoomList from '../screens/Home/Room/RoomList';
 import RoomListAll from '../screens/Home/Room/RoomListAll';
+
+import ReservationForm from '../screens/Home/Form/ReservationForm';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,6 +16,8 @@ const Stack = createNativeStackNavigator();
 const AppStack = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const hiddenHeaderOptions = { headerShown: false };
+
+  
 
   return (
     <Stack.Navigator initialRouteName=''>
@@ -25,6 +28,8 @@ const AppStack = () => {
       
       <Stack.Screen name='RoomListScreen' component={RoomList} options={hiddenHeaderOptions}/>
       <Stack.Screen name='RoomListAllScreen' component={RoomListAll} options={hiddenHeaderOptions}/>
+
+      <Stack.Screen name='ReservationFormScreen' component={ReservationForm} options={hiddenHeaderOptions}/>
     </Stack.Navigator>
   );
 };

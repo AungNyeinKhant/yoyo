@@ -59,7 +59,7 @@ export default function WelcomeScreen({navigation}) {
                     <DefaultButtonComponent 
                         title='Access Marketplace'
                         backgroundColor={theme.colors.primary}
-                        onPress={() => {navigation.push('LoginScreen')}}
+                        onPress={() => {navigation.navigate('LoginScreen')}}
                         color={theme.colors.textLight}
                         otherStyle={{width:370,height:60,borderRadius:37}}
                         otherTextStyle={{fontSize:22}}
