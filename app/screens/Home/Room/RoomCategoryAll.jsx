@@ -8,6 +8,7 @@ import { CommonStyles } from '../../../style/CommonStyles'
 import CarouselSkeletonComponent from '../../../components/Skeleton/CauroselSkeletonComponent'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
 import ListSkeletonComponent from '../../../components/Skeleton/ListSkeletonComponent'
+import DummyData from '../../../config/DummyData.json'
 
 const RoomCategoryAll = ({navigation}) => {
   const [showLoading, setShowLoading] = useState(true);
@@ -30,41 +31,7 @@ const RoomCategoryAll = ({navigation}) => {
     )
   }
 
-    const data2 = [
-        {
-          id : 0,
-          numberOfRooms : 3,
-          roomStatus : 'available',
-          roomPhoto : 'https://img.freepik.com/free-photo/type-entertainment-complex-popular-resort-with-pools-water-parks-turkey-with-more-than-5-million-visitors-year-amara-dolce-vita-luxury-hotel-resort-tekirova-kemer_146671-18728.jpg?semt=ais_hybrid',
-          roomName: 'Standard Room',
-          priceKyats : 30000,
-          roomNumber: 204,
-          roomCategory: 'Budget',
-          link: ''
-        },
-        {
-          id : 1,
-          numberOfRooms : 3,
-          roomStatus : 'available',
-          roomPhoto : 'https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?semt=ais_hybrid',
-          roomName: 'Double Room',
-          priceKyats : 30000,
-          roomNumber: 204,
-          roomCategory: 'Premium',
-          link: ''
-        },
-        {
-          id : 2,
-          numberOfRooms : 3,
-          roomStatus : 'available',
-          roomPhoto : 'https://img.freepik.com/free-photo/type-entertainment-complex-popular-resort-with-pools-water-parks-turkey-with-more-than-5-million-visitors-year-amara-dolce-vita-luxury-hotel-resort-tekirova-kemer_146671-18727.jpg?semt=ais_hybrid',
-          roomName: 'Triple Room',
-          priceKyats : 30000,
-          roomNumber: 204,
-          roomCategory: 'Premium',
-          link: ''
-        }
-      ]
+    const data2 = DummyData.data2;
 
   return (
     <SafeAreaView style={{flex:1}}>

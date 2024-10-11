@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
+import Hotel from '../screens/Home/Hotel';
+import Apartment from '../screens/Home/Apartment';
 
 import RoomCategory from '../screens/Home/Room/RoomCategory';
 import RoomCategoryAll from '../screens/Home/Room/RoomCategoryAll';
@@ -22,7 +24,7 @@ const AppStack = () => {
   return (
     <Stack.Navigator initialRouteName=''>
       
-      {/* <Stack.Screen name='HomeScreen' component={Home} options={hiddenHeaderOptions}/> */}
+      {/* <Stack.Screen name='HomeScreen' component={Hotel} options={hiddenHeaderOptions}/> */}
       <Stack.Screen name='RoomCategoryScreen' component={RoomCategory} options={hiddenHeaderOptions}/>
       <Stack.Screen name='RoomCategoryAllScreen' component={RoomCategoryAll} options={hiddenHeaderOptions}/>
       
