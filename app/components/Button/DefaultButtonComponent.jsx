@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { CommonStyles } from '../../style/CommonStyles';
-import theme from '../../style/colors';
 
 const DefaultButtonComponent = ({ title, backgroundColor, onPress,color,otherStyle,otherTextStyle,disable=false }) => {
   return (
@@ -11,14 +10,14 @@ const DefaultButtonComponent = ({ title, backgroundColor, onPress,color,otherSty
       disabled={disable}
     >          
       <Text
-  style={[
-    CommonStyles.defaultButtonText,
-    color && { color: color },
-    otherTextStyle
-  ]}
->
-  {title}
-</Text>
+        style={[
+          CommonStyles.defaultButtonText,
+          color && { color: color },
+          otherTextStyle
+        ]}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

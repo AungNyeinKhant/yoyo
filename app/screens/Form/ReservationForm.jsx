@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity, Alert } from 'react-native'
 import {useState} from 'react'
-import theme from "../../../style/colors";
+import theme from "../../style/colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
-import TextInputComponent from '../../../components/TextInput/TextInputComponent';
-import PhoneInputComponent from '../../../components/TextInput/PhoneInputComponent';
-import DateInputComponent from '../../../components/TextInput/DateInputComponent';
-import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarComponent';
-import DividerComponent from '../../../components/Divider/DividerComponent';
-import DefaultButtonComponent from "../../../components/Button/DefaultButtonComponent";
-import DropdownPickerComponent from '../../../components/Dropdown/DropdownPickerComponent';
-import { CommonStyles } from '../../../style/CommonStyles';
+import TextInputComponent from '../../components/TextInput/TextInputComponent';
+import PhoneInputComponent from '../../components/TextInput/PhoneInputComponent';
+import DateInputComponent from '../../components/TextInput/DateInputComponent';
+import DetailAppBarComponent from '../../components/AppBar/DetailAppBarComponent';
+import DividerComponent from '../../components/Divider/DividerComponent';
+import DefaultButtonComponent from "../../components/Button/DefaultButtonComponent";
+import DropdownPickerComponent from '../../components/Dropdown/DropdownPickerComponent';
+import { CommonStyles } from '../../style/CommonStyles';
 
 const ReservationForm = ({navigation}) => {
   const [name, setName] = useState('');
@@ -119,11 +119,12 @@ const ReservationForm = ({navigation}) => {
                   <DefaultButtonComponent 
                     title='Continue'
                     backgroundColor={theme.colors.primary}
-                    onPress={() => {navigation.navigate('')}}
+                    onPress={() => {navigation.navigate('AppStack', { screen: 'ReserveMethodScreen' })}}
+                    // onPress={() => Alert.alert('hi')}
                     color={theme.colors.textLight}
                     otherStyle={{width:370,height:60,marginBottom:20,marginTop:30}}
                     otherTextStyle={{fontSize:22}}
-                    disable={isButtonDisabled || showLoading}
+                    // disable={isButtonDisabled || showLoading}
                   />
 
                   {showLoading && <ActivityIndicator size='large' />}
