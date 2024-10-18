@@ -1,8 +1,8 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import {  StyleSheet, Text, View,Image } from 'react-native'
 import {useState,useEffect} from 'react'
 import { CommonStyles } from '../../../style/CommonStyles'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native-gesture-handler'
 import CarouselComponent from '../../../components/Caurosel/CauroselComponent'
 import DetailAppBarComponent from '../../../components/AppBar/DetailAppBarComponent'
 import RoomCategoryListComponent from '../../../components/List/RoomCategoryListComponent'
@@ -14,10 +14,15 @@ import SeeMoreComponent from '../../../components/screen/SeeMoreComponent'
 import CarouselSkeletonComponent from '../../../components/Skeleton/CauroselSkeletonComponent'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import ListSkeletonComponent from '../../../components/Skeleton/ListSkeletonComponent'
+import BottomSheetComponent from '../../../components/BottomSheet/BottomSheetComponent'
+import DefaultButtonComponent from '../../../components/Button/DefaultButtonComponent'
+import discountIcon from '../../../assets/icons/discountIcon.png'
+import theme from '../../../style/colors'
 import DummyData from '../../../config/DummyData.json'
 
 const RoomDetail = ({navigation}) => {
   const [showLoading, setShowLoading] = useState(true);
+  const [visible,setVisible] = useState(false);
 
   useEffect(()=>{
     const timer = setTimeout(() => setShowLoading(false), 2000);
@@ -32,7 +37,7 @@ const RoomDetail = ({navigation}) => {
         <View style={[CommonStyles.scrollViewContainer]}>
           <CarouselSkeletonComponent />
           <ListSkeletonComponent />
-      </View>
+        </View>
       </GestureHandlerRootView>
     )
   }
@@ -40,11 +45,6 @@ const RoomDetail = ({navigation}) => {
   const data = DummyData.data
 
   const data2 = DummyData.data2
-
-
-  if(showLoading){
-    return(<BookingSkeletonComponent />)
-  }
 
   const amenities = [
     { icon: 'snowflake-o', text: 'Air conditioner' },
@@ -107,8 +107,37 @@ const RoomDetail = ({navigation}) => {
                 data={data2}
                 navigation={navigation}
                 type=''
-                onPress={() => Alert.alert("Up to here page")}
+                onPress={() => setVisible(true)}
             />
+
+          <BottomSheetComponent
+            title='Do you know?'
+            isVisible={visible}
+            onClose={() => setVisible(false)}
+            snapPoints={['50%','70%']}
+          >
+            <View style={{flex:1}}>
+              <View style={styles.imgContainer}>
+                <Image source={discountIcon} style={styles.image} />
+              </View>
+              <Text style={[CommonStyles.subTitle,{height:110,marginTop:50,marginBottom:20,textAlign:'center',fontSize:24}]}>Booking with an account is 10% discount on reservation.</Text>
+              <DefaultButtonComponent 
+                title='Book with an account'
+                backgroundColor={theme.colors.primary}
+                color={theme.colors.textLight}
+                otherStyle={{height:60,borderRadius:30}}
+                onPress={()=> navigation.navigate('AppStack', { screen: 'ReservationFormScreen' })}
+              />
+              <DefaultButtonComponent 
+                title='Book without account'
+                backgroundColor={theme.colors.textLightGray}
+                color={theme.colors.textDark}
+                otherStyle={{height:60,borderRadius:30}}
+                onPress={()=> navigation.navigate('AppStack', { screen: 'ReservationFormScreen' })}
+              />
+
+            </View>
+          </BottomSheetComponent>
       </View>
         }
       />
@@ -120,4 +149,14 @@ const RoomDetail = ({navigation}) => {
 
 export default RoomDetail
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  imgContainer :{
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:20
+  },
+  image:{
+    width:90,
+    height:90
+  }
+})
