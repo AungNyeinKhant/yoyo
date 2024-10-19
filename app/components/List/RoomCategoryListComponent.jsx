@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   statusContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    flexGrow:1
   },
   status: {
     paddingHorizontal: 15,

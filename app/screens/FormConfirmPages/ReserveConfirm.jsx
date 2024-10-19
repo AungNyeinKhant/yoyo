@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity,ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import DetailAppBarComponent from '../../components/AppBar/DetailAppBarComponent';
@@ -7,8 +7,12 @@ import { CommonStyles } from '../../style/CommonStyles';
 import DefaultButtonComponent from '../../components/Button/DefaultButtonComponent';
 import theme from '../../style/colors';
 import LeftRightText from '../../components/ConfirmPage/LeftRightText';
+import BottomSheetComponent from '../../components/BottomSheet/BottomSheetComponent';
 
 const ReserveConfirm = ({navigation}) => {
+
+  const [visible,setVisible] = useState(false)
+
   return (
     <ScrollView style={CommonStyles.scrollViewContainer}>
       {/* Header */}
@@ -41,7 +45,27 @@ const ReserveConfirm = ({navigation}) => {
       </View>
 
       {/* Confirm Button */}
-      <DefaultButtonComponent title='Confirm' onPress={() => {navigation.navigate('AppStack', { screen: 'ReserveCompleteScreen' })}} backgroundColor={theme.colors.info} />
+      <DefaultButtonComponent title='Confirm' onPress={()=> setVisible(true)} backgroundColor={theme.colors.info} />
+      
+      <BottomSheetComponent 
+        title='Pay with Debit Card'
+        isVisible={visible}
+        onClose={() => setVisible(false)}
+        snapPoints={['30%','40%']}
+      >
+        <Text style={CommonStyles.formLabel}>
+          Use your credit card to complete you reservation. Your payment will be visible to Tracman.
+        </Text>
+        <DefaultButtonComponent 
+          title='Pay 0.00 Kyats'
+          icon='wallet'
+          backgroundColor={theme.colors.primary}
+          color={theme.colors.textLight}
+          otherStyle={{ marginVertical:20}}
+          onPress={() => {navigation.navigate('AppStack', { screen: 'PaymentFormScreen' })}}
+          
+        />
+      </BottomSheetComponent>
     </ScrollView>
   );
 };
